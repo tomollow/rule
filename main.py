@@ -1,9 +1,9 @@
 #https://qiita.com/MaTTA_RUNTEQ50B/items/c9545f16bc362237d8a9
 # pip install --no-cache-dir -r requirements.txt
 # streamlit run main.py
-#__import__('pysqlite3')
-#import sys
-#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import os
 import streamlit as st
@@ -43,7 +43,7 @@ def main():
     select_temperature = st.sidebar.slider(
         "Temperature", min_value=0.0, max_value=2.0, value=0.0, step=0.1)
     select_chunk_size = st.sidebar.slider(
-        "Chunk Size", min_value=0.0, max_value=1000.0, value=300.0, step=10.0)
+        "Chunk Size", min_value=0.0, max_value=1000.0, value=500.0, step=10.0)
 
     # データの読み込みとベクトル化
     def load_and_embed_data(file_path, file_ext):
@@ -57,8 +57,8 @@ def main():
         documents = loader.load()
         
         text_splitter = CharacterTextSplitter(
-            chunk_size=500, 
-            chunk_overlap=0
+            chunk_size=select_chunk_size, 
+            chunk_overlap=select_temperature
             )
         texts = text_splitter.split_documents(documents)
         
