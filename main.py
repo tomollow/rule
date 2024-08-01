@@ -75,6 +75,7 @@ def main():
 
     # UI周り
     st.title("社内規則ナレッジデータベース(Ver.0.1)")
+    st.text("(B105ハラスメント防止方針まで)")
     with st.sidebar:
         uploaded_file = st.file_uploader(
             "Upload a file", 
